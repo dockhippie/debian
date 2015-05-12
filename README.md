@@ -1,8 +1,7 @@
 # Debian
 
-This is our minimal customized debian Linux base image based on
+This is our minimal customized Debian base image based on
 [debian:jessie](https://registry.hub.docker.com/_/debian/).
-The current container size is ```37.18 MB```
 
 
 ## Usage
@@ -31,7 +30,7 @@ Fork -> Patch -> Push -> Pull Request
 
 ## License
 
-BSD
+MIT
 
 
 ## Copyright
