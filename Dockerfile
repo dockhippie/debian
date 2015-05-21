@@ -11,9 +11,11 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     vim \
     gettext \
     curl \
+    logrotate \
     procps && \
   apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+  rm -rf /var/lib/apt/lists/* && \
+  mkdir -p /etc/logrotate.docker.d
 
 ADD rootfs /
 
