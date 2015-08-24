@@ -1,8 +1,9 @@
 FROM debian:wheezy
 MAINTAINER Thomas Boerger <thomas@webhippie.de>
 
-RUN export DEBIAN_FRONTEND=noninteractive && \
-  apt-get update && \
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update && \
   apt-get install -y \
     ca-certificates \
     bash \

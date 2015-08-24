@@ -1,17 +1,21 @@
 # Debian
 
-This is our minimal customized Debian base image based on
-[debian:jessie](https://registry.hub.docker.com/_/debian/). Optionally you can
-enable the ```logstash-forwarder```, to get it running you need to use ```s6```
-and remove ```/etc/s6/forwarder/down```. If you start ```s6``` you will always
-have running a cron daemon and logrotate as well, to rotate your logs you can
-create a config file at ```/etc/logrotate.docker.d```
+[![](https://badge.imagelayers.io/webhippie/debian:latest.svg)](https://imagelayers.io/?images=webhippie/debian:latest 'Get your own badge on imagelayers.io')
+
+This is our minimal customized [Debian](https://www.debian.org) base image
+based on [debian:wheezy](https://registry.hub.docker.com/_/debian/). Optionally
+you can enable the ```logstash-forwarder```, to get it running you need to use
+```s6``` and remove ```/etc/s6/forwarder/down```. If you start ```s6``` you
+will always have running a cron daemon and logrotate as well, to rotate your
+logs you can create a config file at ```/etc/logrotate.docker.d```
 
 
 ## Usage
 
-```
-docker run -ti --name debian webhippie/debian:latest bash
+```bash
+docker run -ti \
+  --name debian \
+  webhippie/debian:latest
 ```
 
 
