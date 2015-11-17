@@ -10,7 +10,7 @@ fi
 
 if [ -f ./setup ]
 then
-  ./setup
+  source ./setup
 fi
 
 STARTCMD="/usr/bin/logstash-forwarder -config /etc/forwarder"
