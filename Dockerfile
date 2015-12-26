@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM debian:stretch
 MAINTAINER Thomas Boerger <thomas@webhippie.de>
 
 ENV DEBIAN_FRONTEND noninteractive

@@ -3,7 +3,7 @@
 [![](https://badge.imagelayers.io/webhippie/debian:latest.svg)](https://imagelayers.io/?images=webhippie/debian:latest 'Get your own badge on imagelayers.io')
 
 This is our minimal customized [Debian](https://www.debian.org) base image
-based on [debian:wheezy](https://registry.hub.docker.com/_/debian/). Optionally
+based on [Debian](https://registry.hub.docker.com/_/debian/). Optionally
 you can enable the ```logstash-forwarder```, to get it running you need to
 provide the environment variable ```LOGSTASH_ENABLED=true``` and provide some
 other environment variables to get it configured. You can see the available
@@ -25,6 +25,15 @@ docker run -ti \
 
 * [latest](https://github.com/dockhippie/debian/tree/master)
   available as ```webhippie/debian:latest``` at
+  [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
+* [8](https://github.com/dockhippie/debian/tree/8)
+  available as ```webhippie/debian:8``` at
+  [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
+* [7](https://github.com/dockhippie/debian/tree/7)
+  available as ```webhippie/debian:7``` at
+  [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
+* [6](https://github.com/dockhippie/debian/tree/6)
+  available as ```webhippie/debian:6``` at
   [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
 
 
