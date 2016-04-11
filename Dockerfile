@@ -20,4 +20,5 @@ RUN apt-get update && \
 
 ADD rootfs /
 
+ENV TERM xterm
 CMD ["bash"]
