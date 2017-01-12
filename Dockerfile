@@ -10,15 +10,13 @@ RUN apt-get update && \
     bash-completion \
     ncurses-base \
     vim \
-    gettext \
     curl \
-    logrotate \
     procps && \
   apt-get clean && \
-  rm -rf /var/lib/apt/lists/* && \
-  mkdir -p /etc/logrotate.docker.d
+  rm -rf /var/lib/apt/lists/*
 
 ADD rootfs /
 
+ENV CRON_ENABLED false
 ENV TERM xterm
 CMD ["bash"]
