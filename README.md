@@ -1,6 +1,6 @@
 # Debian
 
-[![](https://badge.imagelayers.io/webhippie/debian:latest.svg)](https://imagelayers.io/?images=webhippie/debian:latest 'Get your own badge on imagelayers.io')
+[![](https://images.microbadger.com/badges/image/webhippie/debian.svg)](https://microbadger.com/images/webhippie/debian "Get your own image badge on microbadger.com")
 
 This is our minimal customized [Debian](https://www.debian.org) base image
 based on [official Debian](https://registry.hub.docker.com/_/debian/).
