@@ -10,7 +10,6 @@ This is our minimal customized [Debian](https://www.debian.org) base image based
 * [latest](https://github.com/dockhippie/debian/tree/master) available as ```webhippie/debian:latest``` at [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
 * [8](https://github.com/dockhippie/debian/tree/8) available as ```webhippie/debian:8``` at [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
 * [7](https://github.com/dockhippie/debian/tree/7) available as ```webhippie/debian:7``` at [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
-* [6](https://github.com/dockhippie/debian/tree/6) available as ```webhippie/debian:6``` at [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
 
 
 ## Volumes
