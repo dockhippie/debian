@@ -7,9 +7,7 @@ This is our minimal customized [Debian](https://www.debian.org) base image based
 
 ## Versions
 
-* [latest](https://github.com/dockhippie/debian/tree/master) available as ```webhippie/debian:latest``` at [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
-* [8](https://github.com/dockhippie/debian/tree/8) available as ```webhippie/debian:8``` at [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
-* [7](https://github.com/dockhippie/debian/tree/7) available as ```webhippie/debian:7``` at [Docker Hub](https://registry.hub.docker.com/u/webhippie/debian/)
+To get an overview about the available versions please take a look at the [GitHub branches](https://github.com/dockhippie/alpine/branches/all) or our [Docker Hub tags](https://hub.docker.com/r/webhippie/alpine/tags/), these lists are always up to date.
 
 
 ## Volumes
@@ -27,6 +25,11 @@ This is our minimal customized [Debian](https://www.debian.org) base image based
 ```bash
 ENV CRON_ENABLED false
 ```
+
+
+## Inherited environment variables
+
+* None
 
 
 ## Contributing
