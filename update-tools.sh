@@ -8,13 +8,6 @@ wget -O rootfs/usr/bin/templater \
 echo "> Make templater executable..."
 chmod +x rootfs/usr/bin/templater
 
-echo "> Downloading wait-for-it..."
-wget -O rootfs/usr/bin/wait-for-it \
-  https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh
-
-echo "> Make wait-for-it executable..."
-chmod +x rootfs/usr/bin/wait-for-it
-
 echo "> Downloading gosu..."
 wget -O rootfs/sbin/su-exec \
   https://github.com/tianon/gosu/releases/download/1.10/gosu-amd64
