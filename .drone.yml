@@ -1,0 +1,541 @@
+---
+kind: pipeline
+name: amd64-latest
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: latest
+    dockerfile: latest/Dockerfile.amd64
+    dry_run: true
+    repo: webhippie/debian
+    tags: latest
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: latest
+    dockerfile: latest/Dockerfile.amd64
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: latest
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: arm32v7-latest
+
+platform:
+  os: linux
+  arch: arm
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: latest
+    dockerfile: latest/Dockerfile.arm32v7
+    dry_run: true
+    repo: webhippie/debian
+    tags: latest
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: latest
+    dockerfile: latest/Dockerfile.arm32v7
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: latest
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: arm64v8-latest
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: latest
+    dockerfile: latest/Dockerfile.arm64v8
+    dry_run: true
+    repo: webhippie/debian
+    tags: latest
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: latest
+    dockerfile: latest/Dockerfile.arm64v8
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: latest
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: amd64-9
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 9
+    dockerfile: 9/Dockerfile.amd64
+    dry_run: true
+    repo: webhippie/debian
+    tags: 9
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 9
+    dockerfile: 9/Dockerfile.amd64
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: 9
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: arm32v7-9
+
+platform:
+  os: linux
+  arch: arm
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 9
+    dockerfile: 9/Dockerfile.arm32v7
+    dry_run: true
+    repo: webhippie/debian
+    tags: 9
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 9
+    dockerfile: 9/Dockerfile.arm32v7
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: 9
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: arm64v8-9
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 9
+    dockerfile: 9/Dockerfile.arm64v8
+    dry_run: true
+    repo: webhippie/debian
+    tags: 9
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 9
+    dockerfile: 9/Dockerfile.arm64v8
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: 9
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: amd64-8
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 8
+    dockerfile: 8/Dockerfile.amd64
+    dry_run: true
+    repo: webhippie/debian
+    tags: 8
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 8
+    dockerfile: 8/Dockerfile.amd64
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: 8
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: arm32v7-8
+
+platform:
+  os: linux
+  arch: arm
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 8
+    dockerfile: 8/Dockerfile.arm32v7
+    dry_run: true
+    repo: webhippie/debian
+    tags: 8
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 8
+    dockerfile: 8/Dockerfile.arm32v7
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: 8
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: arm64v8-8
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 8
+    dockerfile: 8/Dockerfile.arm64v8
+    dry_run: true
+    repo: webhippie/debian
+    tags: 8
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 8
+    dockerfile: 8/Dockerfile.arm64v8
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: 8
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: amd64-7
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 7
+    dockerfile: 7/Dockerfile.amd64
+    dry_run: true
+    repo: webhippie/debian
+    tags: 7
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 7
+    dockerfile: 7/Dockerfile.amd64
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: 7
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: arm32v7-7
+
+platform:
+  os: linux
+  arch: arm
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 7
+    dockerfile: 7/Dockerfile.arm32v7
+    dry_run: true
+    repo: webhippie/debian
+    tags: 7
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 7
+    dockerfile: 7/Dockerfile.arm32v7
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: 7
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+---
+kind: pipeline
+name: arm64v8-7
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+- name: dryrun
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 7
+    dockerfile: 7/Dockerfile.arm64v8
+    dry_run: true
+    repo: webhippie/debian
+    tags: 7
+  when:
+    event:
+    - pull_request
+
+- name: publish
+  pull: always
+  image: plugins/docker:latest
+  settings:
+    context: 7
+    dockerfile: 7/Dockerfile.arm64v8
+    password:
+      from_secret: docker_password
+    repo: webhippie/debian
+    tags: 7
+    username:
+      from_secret: docker_username
+  when:
+    event:
+    - push
+    - tag
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pulls/**"
+  - "refs/tags/**"
+
+...
