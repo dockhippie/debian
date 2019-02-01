@@ -15,7 +15,7 @@ steps:
     dockerfile: latest/Dockerfile.amd64
     dry_run: true
     repo: webhippie/debian
-    tags: latest
+    tags: latest-amd64
   when:
     event:
     - pull_request
@@ -29,19 +29,14 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: latest
+    tags: latest-amd64
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
-
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
 
 ---
 kind: pipeline
@@ -60,7 +55,7 @@ steps:
     dockerfile: latest/Dockerfile.arm32v7
     dry_run: true
     repo: webhippie/debian
-    tags: latest
+    tags: latest-arm32v7
   when:
     event:
     - pull_request
@@ -74,19 +69,14 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: latest
+    tags: latest-arm32v7
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
-
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
 
 ---
 kind: pipeline
@@ -105,7 +95,7 @@ steps:
     dockerfile: latest/Dockerfile.arm64v8
     dry_run: true
     repo: webhippie/debian
-    tags: latest
+    tags: latest-arm64v8
   when:
     event:
     - pull_request
@@ -119,19 +109,45 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: latest
+    tags: latest-arm64v8
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
+
+---
+kind: pipeline
+name: manifest-latest
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: manifest
+  pull: always
+  image: plugins/manifest:1
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: latest/manifest.tmpl
+    username:
+      from_secret: docker_username
 
 trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
+  branch:
+  - master
+  event:
+  - push
+
+depends_on:
+- amd64-latest
+- arm32v7-latest
+- arm64v8-latest
 
 ---
 kind: pipeline
@@ -150,7 +166,7 @@ steps:
     dockerfile: 9/Dockerfile.amd64
     dry_run: true
     repo: webhippie/debian
-    tags: 9
+    tags: 9-amd64
   when:
     event:
     - pull_request
@@ -164,19 +180,14 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: 9
+    tags: 9-amd64
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
-
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
 
 ---
 kind: pipeline
@@ -195,7 +206,7 @@ steps:
     dockerfile: 9/Dockerfile.arm32v7
     dry_run: true
     repo: webhippie/debian
-    tags: 9
+    tags: 9-arm32v7
   when:
     event:
     - pull_request
@@ -209,19 +220,14 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: 9
+    tags: 9-arm32v7
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
-
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
 
 ---
 kind: pipeline
@@ -240,7 +246,7 @@ steps:
     dockerfile: 9/Dockerfile.arm64v8
     dry_run: true
     repo: webhippie/debian
-    tags: 9
+    tags: 9-arm64v8
   when:
     event:
     - pull_request
@@ -254,19 +260,45 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: 9
+    tags: 9-arm64v8
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
+
+---
+kind: pipeline
+name: manifest-9
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: manifest
+  pull: always
+  image: plugins/manifest:1
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: 9/manifest.tmpl
+    username:
+      from_secret: docker_username
 
 trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
+  branch:
+  - master
+  event:
+  - push
+
+depends_on:
+- amd64-9
+- arm32v7-9
+- arm64v8-9
 
 ---
 kind: pipeline
@@ -285,7 +317,7 @@ steps:
     dockerfile: 8/Dockerfile.amd64
     dry_run: true
     repo: webhippie/debian
-    tags: 8
+    tags: 8-amd64
   when:
     event:
     - pull_request
@@ -299,19 +331,14 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: 8
+    tags: 8-amd64
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
-
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
 
 ---
 kind: pipeline
@@ -330,7 +357,7 @@ steps:
     dockerfile: 8/Dockerfile.arm32v7
     dry_run: true
     repo: webhippie/debian
-    tags: 8
+    tags: 8-arm32v7
   when:
     event:
     - pull_request
@@ -344,19 +371,14 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: 8
+    tags: 8-arm32v7
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
-
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
 
 ---
 kind: pipeline
@@ -375,7 +397,7 @@ steps:
     dockerfile: 8/Dockerfile.arm64v8
     dry_run: true
     repo: webhippie/debian
-    tags: 8
+    tags: 8-arm64v8
   when:
     event:
     - pull_request
@@ -389,19 +411,45 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: 8
+    tags: 8-arm64v8
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
+
+---
+kind: pipeline
+name: manifest-8
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: manifest
+  pull: always
+  image: plugins/manifest:1
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: 8/manifest.tmpl
+    username:
+      from_secret: docker_username
 
 trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
+  branch:
+  - master
+  event:
+  - push
+
+depends_on:
+- amd64-8
+- arm32v7-8
+- arm64v8-8
 
 ---
 kind: pipeline
@@ -420,7 +468,7 @@ steps:
     dockerfile: 7/Dockerfile.amd64
     dry_run: true
     repo: webhippie/debian
-    tags: 7
+    tags: 7-amd64
   when:
     event:
     - pull_request
@@ -434,19 +482,14 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: 7
+    tags: 7-amd64
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
-
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
 
 ---
 kind: pipeline
@@ -465,7 +508,7 @@ steps:
     dockerfile: 7/Dockerfile.arm32v7
     dry_run: true
     repo: webhippie/debian
-    tags: 7
+    tags: 7-arm32v7
   when:
     event:
     - pull_request
@@ -479,19 +522,14 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: 7
+    tags: 7-arm32v7
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
-
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
 
 ---
 kind: pipeline
@@ -510,7 +548,7 @@ steps:
     dockerfile: 7/Dockerfile.arm64v8
     dry_run: true
     repo: webhippie/debian
-    tags: 7
+    tags: 7-arm64v8
   when:
     event:
     - pull_request
@@ -524,18 +562,72 @@ steps:
     password:
       from_secret: docker_password
     repo: webhippie/debian
-    tags: 7
+    tags: 7-arm64v8
     username:
       from_secret: docker_username
   when:
+    branch:
+    - master
     event:
     - push
-    - tag
+
+---
+kind: pipeline
+name: manifest-7
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: manifest
+  pull: always
+  image: plugins/manifest:1
+  settings:
+    ignore_missing: true
+    password:
+      from_secret: docker_password
+    spec: 7/manifest.tmpl
+    username:
+      from_secret: docker_username
 
 trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pulls/**"
-  - "refs/tags/**"
+  branch:
+  - master
+  event:
+  - push
+
+depends_on:
+- amd64-7
+- arm32v7-7
+- arm64v8-7
+
+---
+kind: pipeline
+name: microbadger-update
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: microbadger
+  pull: always
+  image: plugins/webhook:1
+  settings:
+    url:
+      from_secret: microbadger_url
+
+trigger:
+  branch:
+  - master
+  event:
+  - push
+
+depends_on:
+- manifest-latest
+- manifest-9
+- manifest-8
+- manifest-7
 
 ...
