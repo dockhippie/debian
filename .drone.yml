@@ -533,94 +533,6 @@ steps:
 
 ---
 kind: pipeline
-name: arm32v7-7
-
-platform:
-  os: linux
-  arch: arm
-
-steps:
-- name: dryrun
-  pull: always
-  image: plugins/docker:latest
-  settings:
-    context: 7
-    dockerfile: 7/Dockerfile.arm32v7
-    dry_run: true
-    repo: webhippie/debian
-    tags: 7-arm32v7
-  when:
-    branch:
-      exclude:
-      - master
-    event:
-    - pull_request
-    - push
-
-- name: publish
-  pull: always
-  image: plugins/docker:latest
-  settings:
-    context: 7
-    dockerfile: 7/Dockerfile.arm32v7
-    password:
-      from_secret: docker_password
-    repo: webhippie/debian
-    tags: 7-arm32v7
-    username:
-      from_secret: docker_username
-  when:
-    branch:
-    - master
-    event:
-    - push
-
----
-kind: pipeline
-name: arm64v8-7
-
-platform:
-  os: linux
-  arch: arm64
-
-steps:
-- name: dryrun
-  pull: always
-  image: plugins/docker:latest
-  settings:
-    context: 7
-    dockerfile: 7/Dockerfile.arm64v8
-    dry_run: true
-    repo: webhippie/debian
-    tags: 7-arm64v8
-  when:
-    branch:
-      exclude:
-      - master
-    event:
-    - pull_request
-    - push
-
-- name: publish
-  pull: always
-  image: plugins/docker:latest
-  settings:
-    context: 7
-    dockerfile: 7/Dockerfile.arm64v8
-    password:
-      from_secret: docker_password
-    repo: webhippie/debian
-    tags: 7-arm64v8
-    username:
-      from_secret: docker_username
-  when:
-    branch:
-    - master
-    event:
-    - push
-
----
-kind: pipeline
 name: manifest-7
 
 platform:
@@ -647,8 +559,6 @@ trigger:
 
 depends_on:
 - amd64-7
-- arm32v7-7
-- arm64v8-7
 
 ---
 kind: pipeline
