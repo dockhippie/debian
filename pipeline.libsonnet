@@ -32,7 +32,10 @@ local agent(arch='amd64') =
             repo: name,
           },
           when: {
-            event: ['pull_request'],
+            event: ['pull_request', 'push'],
+            branch: {
+              exclude: ['master'],
+            },
           },
         },
         {
