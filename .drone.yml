@@ -17,12 +17,8 @@ steps:
     repo: webhippie/debian
     tags: latest-amd64
   when:
-    branch:
-      exclude:
-      - master
     event:
     - pull_request
-    - push
 
 - name: publish
   pull: always
@@ -37,10 +33,13 @@ steps:
     username:
       from_secret: docker_username
   when:
-    branch:
-    - master
     event:
     - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pull/**"
 
 ---
 kind: pipeline
@@ -61,12 +60,8 @@ steps:
     repo: webhippie/debian
     tags: latest-arm32v7
   when:
-    branch:
-      exclude:
-      - master
     event:
     - pull_request
-    - push
 
 - name: publish
   pull: always
@@ -81,10 +76,13 @@ steps:
     username:
       from_secret: docker_username
   when:
-    branch:
-    - master
     event:
     - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pull/**"
 
 ---
 kind: pipeline
@@ -105,12 +103,8 @@ steps:
     repo: webhippie/debian
     tags: latest-arm64v8
   when:
-    branch:
-      exclude:
-      - master
     event:
     - pull_request
-    - push
 
 - name: publish
   pull: always
@@ -125,10 +119,13 @@ steps:
     username:
       from_secret: docker_username
   when:
-    branch:
-    - master
     event:
     - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pull/**"
 
 ---
 kind: pipeline
@@ -151,10 +148,8 @@ steps:
       from_secret: docker_username
 
 trigger:
-  branch:
-  - master
-  event:
-  - push
+  ref:
+  - refs/heads/master
 
 depends_on:
 - amd64-latest
@@ -180,12 +175,8 @@ steps:
     repo: webhippie/debian
     tags: 9-amd64
   when:
-    branch:
-      exclude:
-      - master
     event:
     - pull_request
-    - push
 
 - name: publish
   pull: always
@@ -200,10 +191,13 @@ steps:
     username:
       from_secret: docker_username
   when:
-    branch:
-    - master
     event:
     - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pull/**"
 
 ---
 kind: pipeline
@@ -224,12 +218,8 @@ steps:
     repo: webhippie/debian
     tags: 9-arm32v7
   when:
-    branch:
-      exclude:
-      - master
     event:
     - pull_request
-    - push
 
 - name: publish
   pull: always
@@ -244,10 +234,13 @@ steps:
     username:
       from_secret: docker_username
   when:
-    branch:
-    - master
     event:
     - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pull/**"
 
 ---
 kind: pipeline
@@ -268,12 +261,8 @@ steps:
     repo: webhippie/debian
     tags: 9-arm64v8
   when:
-    branch:
-      exclude:
-      - master
     event:
     - pull_request
-    - push
 
 - name: publish
   pull: always
@@ -288,10 +277,13 @@ steps:
     username:
       from_secret: docker_username
   when:
-    branch:
-    - master
     event:
     - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pull/**"
 
 ---
 kind: pipeline
@@ -314,10 +306,8 @@ steps:
       from_secret: docker_username
 
 trigger:
-  branch:
-  - master
-  event:
-  - push
+  ref:
+  - refs/heads/master
 
 depends_on:
 - amd64-9
@@ -343,12 +333,8 @@ steps:
     repo: webhippie/debian
     tags: 8-amd64
   when:
-    branch:
-      exclude:
-      - master
     event:
     - pull_request
-    - push
 
 - name: publish
   pull: always
@@ -363,10 +349,13 @@ steps:
     username:
       from_secret: docker_username
   when:
-    branch:
-    - master
     event:
     - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pull/**"
 
 ---
 kind: pipeline
@@ -387,12 +376,8 @@ steps:
     repo: webhippie/debian
     tags: 8-arm32v7
   when:
-    branch:
-      exclude:
-      - master
     event:
     - pull_request
-    - push
 
 - name: publish
   pull: always
@@ -407,10 +392,13 @@ steps:
     username:
       from_secret: docker_username
   when:
-    branch:
-    - master
     event:
     - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pull/**"
 
 ---
 kind: pipeline
@@ -431,12 +419,8 @@ steps:
     repo: webhippie/debian
     tags: 8-arm64v8
   when:
-    branch:
-      exclude:
-      - master
     event:
     - pull_request
-    - push
 
 - name: publish
   pull: always
@@ -451,10 +435,13 @@ steps:
     username:
       from_secret: docker_username
   when:
-    branch:
-    - master
     event:
     - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pull/**"
 
 ---
 kind: pipeline
@@ -477,10 +464,8 @@ steps:
       from_secret: docker_username
 
 trigger:
-  branch:
-  - master
-  event:
-  - push
+  ref:
+  - refs/heads/master
 
 depends_on:
 - amd64-8
@@ -506,12 +491,8 @@ steps:
     repo: webhippie/debian
     tags: 7-amd64
   when:
-    branch:
-      exclude:
-      - master
     event:
     - pull_request
-    - push
 
 - name: publish
   pull: always
@@ -526,10 +507,13 @@ steps:
     username:
       from_secret: docker_username
   when:
-    branch:
-    - master
     event:
     - push
+
+trigger:
+  ref:
+  - refs/heads/master
+  - "refs/pull/**"
 
 ---
 kind: pipeline
@@ -552,10 +536,8 @@ steps:
       from_secret: docker_username
 
 trigger:
-  branch:
-  - master
-  event:
-  - push
+  ref:
+  - refs/heads/master
 
 depends_on:
 - amd64-7
@@ -577,10 +559,8 @@ steps:
       from_secret: microbadger_url
 
 trigger:
-  branch:
-  - master
-  event:
-  - push
+  ref:
+  - refs/heads/master
 
 depends_on:
 - manifest-latest
