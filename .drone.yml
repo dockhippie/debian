@@ -474,76 +474,6 @@ depends_on:
 
 ---
 kind: pipeline
-name: amd64-7
-
-platform:
-  os: linux
-  arch: amd64
-
-steps:
-- name: dryrun
-  pull: always
-  image: plugins/docker:latest
-  settings:
-    context: 7
-    dockerfile: 7/Dockerfile.amd64
-    dry_run: true
-    repo: webhippie/debian
-    tags: 7-amd64
-  when:
-    event:
-    - pull_request
-
-- name: publish
-  pull: always
-  image: plugins/docker:latest
-  settings:
-    context: 7
-    dockerfile: 7/Dockerfile.amd64
-    password:
-      from_secret: docker_password
-    repo: webhippie/debian
-    tags: 7-amd64
-    username:
-      from_secret: docker_username
-  when:
-    event:
-    - push
-
-trigger:
-  ref:
-  - refs/heads/master
-  - "refs/pull/**"
-
----
-kind: pipeline
-name: manifest-7
-
-platform:
-  os: linux
-  arch: amd64
-
-steps:
-- name: manifest
-  pull: always
-  image: plugins/manifest:1
-  settings:
-    ignore_missing: true
-    password:
-      from_secret: docker_password
-    spec: 7/manifest.tmpl
-    username:
-      from_secret: docker_username
-
-trigger:
-  ref:
-  - refs/heads/master
-
-depends_on:
-- amd64-7
-
----
-kind: pipeline
 name: microbadger-update
 
 platform:
@@ -566,6 +496,5 @@ depends_on:
 - manifest-latest
 - manifest-9
 - manifest-8
-- manifest-7
 
 ...
