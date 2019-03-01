@@ -6,7 +6,7 @@ local agent(arch='amd64') =
   else if arch == 'arm32v7' then
     'arm'
   else if arch == 'arm64v8' then
-  	'arm64'
+    'arm64'
   else
     arch;
 
@@ -26,7 +26,7 @@ local agent(arch='amd64') =
           pull: 'always',
           settings: {
             dry_run: true,
-            tags: version,
+            tags: version + '-' + arch,
             dockerfile: version + '/Dockerfile.' + arch,
             context: version,
             repo: name,
@@ -40,7 +40,7 @@ local agent(arch='amd64') =
           image: 'plugins/docker:latest',
           pull: 'always',
           settings: {
-            tags: version,
+            tags: version + '-' + arch,
             dockerfile: version + '/Dockerfile.' + arch,
             context: version,
             repo: name,
@@ -48,15 +48,69 @@ local agent(arch='amd64') =
             password: { from_secret: 'docker_password' },
           },
           when: {
-            event: ['push', 'tag'],
+            event: ['push'],
           },
         },
       ],
       trigger: {
         ref: [
           'refs/heads/master',
-          'refs/pulls/**',
-          'refs/tags/**',
+          'refs/pull/**',
+        ],
+      },
+    },
+
+  manifest(version='latest', depends_on=[])::
+    {
+      kind: 'pipeline',
+      name: 'manifest-' + version,
+      platform: {
+        os: 'linux',
+        arch: agent('amd64'),
+      },
+      steps: [
+        {
+          name: 'manifest',
+          image: 'plugins/manifest:1',
+          pull: 'always',
+          settings: {
+            username: { from_secret: 'docker_username' },
+            password: { from_secret: 'docker_password' },
+            spec: version + '/manifest.tmpl',
+            ignore_missing: true,
+          },
+        },
+      ],
+      depends_on: [x + '-' + version for x in depends_on],
+      trigger: {
+        ref: [
+          'refs/heads/master',
+        ],
+      },
+    },
+
+  microbadger(depends_on=[])::
+    {
+      kind: 'pipeline',
+      name: 'microbadger-update',
+      platform: {
+        os: 'linux',
+        arch: agent('amd64'),
+      },
+      steps: [
+        {
+          name: 'microbadger',
+          image: 'plugins/webhook:1',
+          pull: 'always',
+          settings: {
+            url: { from_secret: 'microbadger_url' },
+          },
+        },
+      ],
+      depends_on: ['manifest-' + x for x in depends_on],
+      trigger: {
+        ref: [
+          'refs/heads/master',
         ],
       },
     },
