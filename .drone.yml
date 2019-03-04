@@ -169,8 +169,8 @@ steps:
   pull: always
   image: plugins/docker:latest
   settings:
-    context: 9
-    dockerfile: 9/Dockerfile.amd64
+    context: v9
+    dockerfile: v9/Dockerfile.amd64
     dry_run: true
     repo: webhippie/debian
     tags: 9-amd64
@@ -182,8 +182,8 @@ steps:
   pull: always
   image: plugins/docker:latest
   settings:
-    context: 9
-    dockerfile: 9/Dockerfile.amd64
+    context: v9
+    dockerfile: v9/Dockerfile.amd64
     password:
       from_secret: docker_password
     repo: webhippie/debian
@@ -212,8 +212,8 @@ steps:
   pull: always
   image: plugins/docker:latest
   settings:
-    context: 9
-    dockerfile: 9/Dockerfile.arm32v7
+    context: v9
+    dockerfile: v9/Dockerfile.arm32v7
     dry_run: true
     repo: webhippie/debian
     tags: 9-arm32v7
@@ -225,8 +225,8 @@ steps:
   pull: always
   image: plugins/docker:latest
   settings:
-    context: 9
-    dockerfile: 9/Dockerfile.arm32v7
+    context: v9
+    dockerfile: v9/Dockerfile.arm32v7
     password:
       from_secret: docker_password
     repo: webhippie/debian
@@ -255,8 +255,8 @@ steps:
   pull: always
   image: plugins/docker:latest
   settings:
-    context: 9
-    dockerfile: 9/Dockerfile.arm64v8
+    context: v9
+    dockerfile: v9/Dockerfile.arm64v8
     dry_run: true
     repo: webhippie/debian
     tags: 9-arm64v8
@@ -268,8 +268,8 @@ steps:
   pull: always
   image: plugins/docker:latest
   settings:
-    context: 9
-    dockerfile: 9/Dockerfile.arm64v8
+    context: v9
+    dockerfile: v9/Dockerfile.arm64v8
     password:
       from_secret: docker_password
     repo: webhippie/debian
@@ -301,7 +301,7 @@ steps:
     ignore_missing: true
     password:
       from_secret: docker_password
-    spec: 9/manifest.tmpl
+    spec: v9/manifest.tmpl
     username:
       from_secret: docker_username
 
@@ -335,6 +335,7 @@ trigger:
   - refs/heads/master
 
 depends_on:
+- manifest-latest
 - manifest-latest
 - manifest-9
 
