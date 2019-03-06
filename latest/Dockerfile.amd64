@@ -1,4 +1,4 @@
-FROM debian:9@sha256:84e2351ae76c072adac3b6e0a958e5b238e693bdff3cc4f3c94eace3d4577f76
+FROM debian:9@sha256:72e996751fe42b2a0c1e6355730dc2751ccda50564fec929f76804a6365ef5ef
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
   org.label-schema.name="Debian" \
