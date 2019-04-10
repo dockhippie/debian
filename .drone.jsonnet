@@ -10,5 +10,5 @@ local name = 'webhippie/debian';
   pipeline.build(name, 'v9', '9', 'arm32v7'),
   pipeline.build(name, 'v9', '9', 'arm64v8'),
   pipeline.manifest('v9', '9', ['amd64', 'arm32v7', 'arm64v8']),
-  pipeline.microbadger(['latest', 'latest', '9']),
+  pipeline.microbadger(['latest', '9']),
 ]

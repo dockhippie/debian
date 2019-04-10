@@ -336,7 +336,6 @@ trigger:
 
 depends_on:
 - manifest-latest
-- manifest-latest
 - manifest-9
 
 ...
