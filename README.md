@@ -25,7 +25,7 @@ This is our minimal customized [Debian](https://www.debian.org) base image based
 ## Available environment variables
 
 ```bash
-ENV CRON_ENABLED false
+CRON_ENABLED = false
 ```
 
 
