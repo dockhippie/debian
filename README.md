@@ -9,6 +9,7 @@ This is our minimal customized [Debian](https://www.debian.org) base image based
 ## Versions
 
 * [latest](./latest) available as `webhippie/debian:latest`
+* [10](./v10) available as `webhippie/debian:10`
 * [9](./v9) available as `webhippie/debian:9`
 
 
