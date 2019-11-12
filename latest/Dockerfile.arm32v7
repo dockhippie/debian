@@ -1,4 +1,4 @@
-FROM arm32v7/debian:9@sha256:b3919800e24101ffe0a0b8558dcbc818e6a26a6326310c799bf5a300ecee6a0e
+FROM arm32v7/debian:10
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
   org.label-schema.name="Debian" \
