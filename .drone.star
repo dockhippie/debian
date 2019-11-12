@@ -250,6 +250,7 @@ def trigger(config):
         'name': 'execute',
         'image': 'plugins/downstream:latest',
         'pull': 'always',
+        'failure': 'ignore',
         'settings': {
           'server': 'https://cloud.drone.io',
           'token': {
