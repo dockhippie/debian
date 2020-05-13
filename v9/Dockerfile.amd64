@@ -1,4 +1,4 @@
-FROM amd64/debian:9@sha256:915dded6fbb9fd64bbe230796ea8c8a141032fcb177430ffc1679a3b9ca3b281
+FROM amd64/debian:9@sha256:ac69446b8d555ac07fb5e0429eb6516b841dad9651d8f5ff2f4d8d1a1a911b78
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
   org.label-schema.name="Debian" \
