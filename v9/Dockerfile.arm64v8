@@ -1,4 +1,4 @@
-FROM arm64v8/debian:9@sha256:07f242988a4e89f8c43af0f7752f996d0d8496eb139a28659eb4f1cfb1152296
+FROM arm64v8/debian:9@sha256:109066fe2fe97aa5196bc97af7ec3dd686dbf00200290d23e7723d1ca155798a
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
   org.label-schema.name="Debian" \
