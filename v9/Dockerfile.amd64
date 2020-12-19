@@ -16,6 +16,8 @@ CMD ["bash"]
 RUN apt-get update && \
   apt-get upgrade -y && \
   apt-get install -y ca-certificates bash bash-completion ncurses-base vim curl procps cron && \
+  curl -sSLo /usr/bin/wait-for-it https://raw.githubusercontent.com/thegeeklab/wait-for/d17c23172a39d7555f184d916881aeae6d446a22/wait-for && \
+  chmod +x /usr/bin/wait-for-it && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
