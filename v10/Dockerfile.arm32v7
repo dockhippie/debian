@@ -1,10 +1,8 @@
 FROM arm32v7/debian:10@sha256:2d55b0b2febd4aaf120e534a0511158b601a6b0a6c5461636e4427ce8840af0a
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
-  org.label-schema.name="Debian" \
-  org.label-schema.version="10" \
-  org.label-schema.vendor="Thomas Boerger" \
-  org.label-schema.schema-version="1.0"
+  org.opencontainers.image.title="Debian" \
+  org.opencontainers.image.vendor="Thomas Boerger"
 
 ENV CRON_ENABLED false
 ENV TERM xterm
