@@ -1,10 +1,8 @@
 FROM arm64v8/debian:10@sha256:7bf528fa91df041f696d30aad7d41f3532342f9ed92dd7476c59b8b24e00ff9b
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
-  org.label-schema.name="Debian" \
-  org.label-schema.version="latest" \
-  org.label-schema.vendor="Thomas Boerger" \
-  org.label-schema.schema-version="1.0"
+  org.opencontainers.image.title="Debian" \
+  org.opencontainers.image.vendor="Thomas Boerger"
 
 ENV CRON_ENABLED false
 ENV TERM xterm
@@ -15,32 +13,10 @@ CMD ["bash"]
 
 RUN apt-get update && \
   apt-get upgrade -y && \
-  apt-get install -y ca-certificates bash bash-completion ncurses-base vim curl procps cron && \
+  apt-get install -y ca-certificates bash bash-completion ncurses-base vim curl procps cron s6 && \
+  curl --insecure -sSLo /usr/bin/wait-for-it https://raw.githubusercontent.com/thegeeklab/wait-for/d17c23172a39d7555f184d916881aeae6d446a22/wait-for && \
+  chmod +x /usr/bin/wait-for-it && \
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
 COPY ./overlay ./overlay-arm64v8 /
-
-RUN apt-get update && \
-  apt-get install -y build-essential && \
-  curl -sSL -o- https://github.com/skarnet/skalibs/archive/v2.7.0.0.tar.gz | tar -xvz -C /tmp && \
-  cd /tmp/skalibs-2.7.0.0 && \
-  ./configure && \
-  make && \
-  make install && \
-  rm -rf /tmp/skalibs-2.7.0.0 && \
-  curl -sSL -o- https://github.com/skarnet/execline/archive/v2.5.0.1.tar.gz | tar -xvz -C /tmp && \
-  cd /tmp/execline-2.5.0.1 && \
-  ./configure && \
-  make && \
-  make install && \
-  rm -rf /tmp/execline-2.5.0.1 && \
-  curl -sSL -o- https://github.com/skarnet/s6/archive/v2.7.2.2.tar.gz | tar -xvz -C /tmp && \
-  cd /tmp/s6-2.7.2.2 && \
-  ./configure && \
-  make && \
-  make install && \
-  rm -rf /tmp/s6-2.7.2.2 && \
-  apt-get purge -y build-essential && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*

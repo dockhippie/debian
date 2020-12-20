@@ -1,52 +1,41 @@
-# Debian
+# debian
 
-[![Build Status](https://cloud.drone.io/api/badges/dockhippie/debian/status.svg)](https://cloud.drone.io/dockhippie/debian)
-[![](https://images.microbadger.com/badges/image/webhippie/debian.svg)](https://microbadger.com/images/webhippie/debian "Get your own image badge on microbadger.com")
+[![Docker Build](https://github.com/dockhippie/debian/workflows/docker/badge.svg)](https://github.com/dockhippie/debian/actions?query=workflow%3Adocker) [![Readme Build](https://github.com/dockhippie/debian/workflows/readme/badge.svg)](https://github.com/dockhippie/debian/actions?query=workflow%3Areadme) [![Docker Size](https://img.shields.io/docker/image-size/webhippie/debian/latest)](#) [![Docker Pulls](https://img.shields.io/docker/pulls/webhippie/debian)](https://hub.docker.com/r/webhippie/debian)
 
-This is our minimal customized [Debian](https://www.debian.org) base image based on [official Debian](https://registry.hub.docker.com/_/debian/). Optionally you can enable a cron daemon, to get it running you need to provide the environment variable `CRON_ENABLED=true` or `CRON_ENABLED=1`. You can see the available variables below. Be aware that you have to start `s6` to get the cron daemon started automatically.
-
+This is our customized [Debian](https://www.debian.org) base image based on the [official Debian image](https://hub.docker.com/_/debian).
 
 ## Versions
 
-* [latest](./latest) available as `webhippie/debian:latest`
-* [10](./v10) available as `webhippie/debian:10`
-* [9](./v9) available as `webhippie/debian:9`
-
+For the available versions please look at [Docker Hub](https://hub.docker.com/r/webhippie/debian/tags) or [Quay](https://quay.io/repository/tboerger/debian?tab=tags) or check the existing folders within the [GitHub repository](https://github.com/dockhippie/debian).
 
 ## Volumes
 
 * None
 
-
 ## Ports
 
 * None
 
-
 ## Available environment variables
 
-```bash
-CRON_ENABLED = false
-```
+```console
 
+```
 
 ## Contributing
 
 Fork -> Patch -> Push -> Pull Request
 
-
 ## Authors
 
 * [Thomas Boerger](https://github.com/tboerger)
-
 
 ## License
 
 MIT
 
-
 ## Copyright
 
-```
+```console
 Copyright (c) 2018 Thomas Boerger <http://www.webhippie.de>
 ```
