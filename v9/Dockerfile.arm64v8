@@ -1,4 +1,4 @@
-FROM arm64v8/debian:9@sha256:5d393126dfdcdc4a7e266e5bb2fc3832afb95e960b564571be2f4e55b954f918
+FROM arm64v8/debian:9@sha256:c6a9f957fcd08735e15eaf577d91d54fd435358303a08dd6d10dbb78e83d788b
 
 LABEL maintainer="Thomas Boerger <thomas@webhippie.de>" \
   org.opencontainers.image.title="Debian" \
