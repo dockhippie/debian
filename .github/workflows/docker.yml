@@ -45,7 +45,7 @@ jobs:
       - name: Image metadata
         id: meta
         if: steps.changed.outputs.changed == 'true'
-        uses: crazy-max/ghaction-docker-meta@v1
+        uses: crazy-max/ghaction-docker-meta@8b842e721d38d18bea23b57f4c040e53331f4ca2 # renovate: tag=v3
         with:
           images: webhippie/debian
 
