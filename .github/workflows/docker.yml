@@ -21,11 +21,11 @@ jobs:
 
     steps:
       - name: Checkout source
-        uses: actions/checkout@v2
+        uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f # renovate: tag=v2
         with:
           fetch-depth: 100
 
-      - uses: marceloprado/has-changed-path@v1
+      - uses: marceloprado/has-changed-path@0ffbcfc95a9a2976ba454d8e8687bb49f989f721 # renovate: tag=v1
         id: changed
         with:
           paths: ${{ matrix.folder }} .github/workflows/docker.yml
@@ -45,30 +45,30 @@ jobs:
       - name: Image metadata
         id: meta
         if: steps.changed.outputs.changed == 'true'
-        uses: crazy-max/ghaction-docker-meta@v1
+        uses: crazy-max/ghaction-docker-meta@9be43f076db7f0f4ac30d81183fc9d956b9e9eb6 # renovate: tag=v1
         with:
           images: webhippie/debian
 
       - name: Setup QEMU
         id: qemu
         if: steps.changed.outputs.changed == 'true'
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@27d0a4f181a40b142cce983c5393082c365d1480 # renovate: tag=v1
 
       - name: Setup Buildx
         id: buildx
         if: steps.changed.outputs.changed == 'true'
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@abe5d8f79a1606a2d3e218847032f3f2b1726ab0 # renovate: tag=v1
 
       - name: Docker login
         if: steps.changed.outputs.changed == 'true' && github.event_name != 'pull_request'
-        uses: docker/login-action@v1
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9 # renovate: tag=v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: QuayIO login
         if: steps.changed.outputs.changed == 'true' && github.event_name != 'pull_request'
-        uses: docker/login-action@v1
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9 # renovate: tag=v1
         with:
           registry: quay.io
           username: ${{ secrets.QUAY_USERNAME }}
@@ -76,7 +76,7 @@ jobs:
 
       - name: Build amd64
         if: steps.changed.outputs.changed == 'true'
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@1bc1040caef9e604eb543693ba89b5bf4fc80935 # renovate: tag=v2
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: ${{ matrix.folder }}/
@@ -90,7 +90,7 @@ jobs:
 
       - name: Build arm64v8
         if: steps.changed.outputs.changed == 'true'
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@1bc1040caef9e604eb543693ba89b5bf4fc80935 # renovate: tag=v2
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: ${{ matrix.folder }}/
@@ -104,7 +104,7 @@ jobs:
 
       - name: Build arm32v7
         if: steps.changed.outputs.changed == 'true'
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@1bc1040caef9e604eb543693ba89b5bf4fc80935 # renovate: tag=v2
         with:
           builder: ${{ steps.buildx.outputs.name }}
           context: ${{ matrix.folder }}/
@@ -118,7 +118,7 @@ jobs:
 
       - name: Image manifest
         if: steps.changed.outputs.changed == 'true' && github.event_name != 'pull_request'
-        uses: addnab/docker-run-action@v1
+        uses: addnab/docker-run-action@1cd63ec344892b3e6174b19bde301d071a573ade # renovate: tag=v1
         with:
           image: toolhippie/manifest-tool:latest
           options: -v ${{ github.workspace }}:/work -w /work
