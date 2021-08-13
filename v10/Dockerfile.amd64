@@ -1,4 +1,4 @@
-FROM debian:10@sha256:0c493c517180a20aecaa80fe12ec594476df79deabbed42296169380df962e86 AS build
+FROM debian:10@sha256:cc58a29c333ee594f7624d968123429b26916face46169304f07580644dde6b2 AS build
 
 RUN apt update && \
   apt-get install -y wget
@@ -23,7 +23,7 @@ ENV GOSU_VERSION=1.13
 
 RUN wget -O /tmp/su-exec https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64
 
-FROM debian:10@sha256:0c493c517180a20aecaa80fe12ec594476df79deabbed42296169380df962e86
+FROM debian:10@sha256:cc58a29c333ee594f7624d968123429b26916face46169304f07580644dde6b2
 
 ENV CRON_ENABLED false
 ENV TERM xterm
