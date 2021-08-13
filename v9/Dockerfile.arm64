@@ -1,5 +1,8 @@
 FROM arm64v8/debian:9@sha256:e71759301f7cf89608143eadf420334a0b44b8e395342d193f74c850d8c58d83 AS build
 
+RUN apt update && \
+  apt-get install -y wget
+
 # renovate: datasource=github-releases depName=thegeeklab/wait-for
 ENV WAITFOR_VERSION=0.2.0
 

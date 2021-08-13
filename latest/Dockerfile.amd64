@@ -1,5 +1,8 @@
 FROM debian:10@sha256:0c493c517180a20aecaa80fe12ec594476df79deabbed42296169380df962e86 AS build
 
+RUN apt update && \
+  apt-get install -y wget
+
 # renovate: datasource=github-releases depName=thegeeklab/wait-for
 ENV WAITFOR_VERSION=0.2.0
 
