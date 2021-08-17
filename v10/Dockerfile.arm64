@@ -1,4 +1,4 @@
-FROM arm64v8/debian:10@sha256:ebbe289abf50a063f4c513189c4634267d26397ae28f19d302956ad1f18ea555 AS build
+FROM arm64v8/debian:10@sha256:270b36ee7abd3e101ebba424015074f69c53b2ff097017458aa7941bf7727308 AS build
 
 RUN apt update && \
   apt-get install -y wget
@@ -27,7 +27,7 @@ ENV GOSU_VERSION=1.13
 RUN wget -O /tmp/su-exec https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-arm64 && \
   chmod +x /tmp/su-exec
 
-FROM arm64v8/debian:10@sha256:ebbe289abf50a063f4c513189c4634267d26397ae28f19d302956ad1f18ea555
+FROM arm64v8/debian:10@sha256:270b36ee7abd3e101ebba424015074f69c53b2ff097017458aa7941bf7727308
 
 ENV CRON_ENABLED false
 ENV TERM xterm
