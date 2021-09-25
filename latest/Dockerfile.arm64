@@ -1,5 +1,8 @@
 FROM arm64v8/debian:10@sha256:b4cf9a9f5266cd9e75a5648238831b88ed4d124567f2e3a5beca0d9dab4a4caf AS build
 
+ENV TERM xterm
+ENV DEBIAN_FRONTEND noninteractive
+
 RUN apt update && \
   apt-get install -y wget
 
