@@ -8,13 +8,16 @@
     "ignorePaths": [
         "archive/"
     ],
-    "packageRules": [{
-        "datasources": [
-            "docker"
-        ],
-        "updateTypes": [
-            "major"
-        ],
-        "enabled": false
-    }]
+    "packageRules": [
+        {
+            "datasources": [
+                "docker"
+            ],
+            "updateTypes": [
+                "major",
+                "minor"
+            ],
+            "enabled": false
+        }
+    ]
 }
