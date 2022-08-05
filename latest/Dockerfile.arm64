@@ -13,7 +13,7 @@ RUN wget -O /tmp/wait-for-it https://github.com/thegeeklab/wait-for/releases/dow
   chmod +x /tmp/wait-for-it
 
 # renovate: datasource=github-releases depName=hairyhenderson/gomplate
-ENV GOMPLATE_VERSION=3.11.1
+ENV GOMPLATE_VERSION=3.11.2
 
 RUN wget -O /tmp/gomplate https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-arm64 && \
   chmod +x /tmp/gomplate
