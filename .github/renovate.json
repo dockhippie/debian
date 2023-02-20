@@ -8,22 +8,14 @@
     "ignorePaths": [
         "archive/"
     ],
-    "docker": {
-        "digest": {
-            "groupName": "Docker digests",
-            "automerge": true
-        }
-    },
-    "packageRules": [
-        {
-            "datasources": [
-                "docker"
-            ],
-            "updateTypes": [
-                "major",
-                "minor"
-            ],
-            "enabled": false
-        }
-    ]
+    "packageRules": [{
+        "datasources": [
+            "docker"
+        ],
+        "updateTypes": [
+            "major",
+            "minor"
+        ],
+        "enabled": false
+    }]
 }
