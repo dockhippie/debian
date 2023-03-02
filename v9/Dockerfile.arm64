@@ -7,7 +7,7 @@ RUN apt update && \
   apt-get install -y wget
 
 # renovate: datasource=github-releases depName=thegeeklab/wait-for
-ENV WAITFOR_VERSION=0.3.0
+ENV WAITFOR_VERSION=0.4.2
 
 RUN wget -O /tmp/wait-for-it https://github.com/thegeeklab/wait-for/releases/download/v${WAITFOR_VERSION}/wait-for && \
   chmod +x /tmp/wait-for-it
