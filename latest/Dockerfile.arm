@@ -1,4 +1,4 @@
-FROM arm32v7/debian:11@sha256:ab0ce510343d33415fc4eaea0102da2d24cb720b185aaee0b411c48a07abb0de AS build
+FROM arm32v7/debian:11@sha256:b0f334e3bc529853a0fad8d2b5d85476d0316bff06ab5328d4628f90a7a789ab AS build
 
 ENV TERM xterm
 ENV DEBIAN_FRONTEND noninteractive
@@ -30,7 +30,7 @@ ENV GOSU_VERSION=1.13
 RUN wget -O /tmp/su-exec https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-armhf && \
   chmod +x /tmp/su-exec
 
-FROM arm32v7/debian:11@sha256:ab0ce510343d33415fc4eaea0102da2d24cb720b185aaee0b411c48a07abb0de
+FROM arm32v7/debian:11@sha256:b0f334e3bc529853a0fad8d2b5d85476d0316bff06ab5328d4628f90a7a789ab
 
 ENV CRON_ENABLED false
 ENV TERM xterm
