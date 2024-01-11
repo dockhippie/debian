@@ -1,4 +1,4 @@
-FROM debian:11@sha256:b1bb0fe67a626f281da53c8699d6415e1f23b802da7f96df235cae5c17dacf2d AS build
+FROM debian:11@sha256:71cb300d5448af821aedfe63afd55ba05f45a6a79f00dcd131b96b780bb99fe4 AS build
 
 ENV TERM xterm
 ENV DEBIAN_FRONTEND noninteractive
@@ -30,7 +30,7 @@ ENV GOSU_VERSION=1.13
 RUN wget -O /tmp/su-exec https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-amd64 && \
   chmod +x /tmp/su-exec
 
-FROM debian:11@sha256:b1bb0fe67a626f281da53c8699d6415e1f23b802da7f96df235cae5c17dacf2d
+FROM debian:11@sha256:71cb300d5448af821aedfe63afd55ba05f45a6a79f00dcd131b96b780bb99fe4
 
 ENV CRON_ENABLED false
 ENV TERM xterm
