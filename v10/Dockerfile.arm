@@ -1,7 +1,7 @@
 FROM arm32v7/debian:10@sha256:81cd707548e590cc6db6f230af43bfb4009adb77c7dedbf1f0f53bb08259dafb AS build
 
-ENV TERM xterm
-ENV DEBIAN_FRONTEND noninteractive
+ENV TERM=xterm
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && \
   apt-get install -y wget
@@ -10,31 +10,35 @@ RUN apt update && \
 ENV WAITFOR_VERSION=0.4.3
 
 RUN wget -O /tmp/wait-for-it https://github.com/thegeeklab/wait-for/releases/download/v${WAITFOR_VERSION}/wait-for && \
-  chmod +x /tmp/wait-for-it
+  chmod +x /tmp/wait-for-it && \
+  /tmp/wait-for-it --help >/dev/null
 
 # renovate: datasource=github-releases depName=hairyhenderson/gomplate
 ENV GOMPLATE_VERSION=4.3.3
 
 RUN wget -O /tmp/gomplate https://github.com/hairyhenderson/gomplate/releases/download/v${GOMPLATE_VERSION}/gomplate_linux-armv7 && \
-  chmod +x /tmp/gomplate
+  chmod +x /tmp/gomplate && \
+  /tmp/gomplate --help >/dev/null
 
 # renovate: datasource=github-releases depName=krallin/tini
 ENV TINI_VERSION=0.19.0
 
 RUN wget -O /tmp/tini https://github.com/krallin/tini/releases/download/v${TINI_VERSION}/tini-armhf && \
-  chmod +x /tmp/tini
+  chmod +x /tmp/tini && \
+  /tmp/tini --version >/dev/null
 
 # renovate: datasource=github-releases depName=tianon/gosu
 ENV GOSU_VERSION=1.13
 
 RUN wget -O /tmp/su-exec https://github.com/tianon/gosu/releases/download/${GOSU_VERSION}/gosu-armhf && \
-  chmod +x /tmp/su-exec
+  chmod +x /tmp/su-exec && \
+  /tmp/su-exec --help >/dev/null
 
 FROM arm32v7/debian:10@sha256:81cd707548e590cc6db6f230af43bfb4009adb77c7dedbf1f0f53bb08259dafb
 
-ENV CRON_ENABLED false
-ENV TERM xterm
-ENV DEBIAN_FRONTEND noninteractive
+ENV CRON_ENABLED=false
+ENV TERM=xterm
+ENV DEBIAN_FRONTEND=noninteractive
 
 ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/entrypoint"]
 CMD ["bash"]
