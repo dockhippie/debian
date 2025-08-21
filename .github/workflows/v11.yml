@@ -21,6 +21,7 @@ name: v11
 
 permissions:
   contents: read
+  packages: write
 
 jobs:
   docker:

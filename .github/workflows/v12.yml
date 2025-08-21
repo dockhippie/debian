@@ -21,6 +21,7 @@ name: v12
 
 permissions:
   contents: read
+  packages: write
 
 jobs:
   docker:
