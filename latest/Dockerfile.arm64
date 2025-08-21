@@ -1,4 +1,4 @@
-FROM arm64v8/debian:11@sha256:4811a4a3a14d6e28d1a5b7f98edd187dc66e036ee49bba614492c3fe1290c524 AS build
+FROM arm64v8/debian:11 AS build
 
 ENV TERM=xterm
 ENV DEBIAN_FRONTEND=noninteractive
@@ -11,7 +11,7 @@ ENV WAITFOR_VERSION=0.4.3
 
 RUN wget -O /tmp/wait-for-it https://github.com/thegeeklab/wait-for/releases/download/v${WAITFOR_VERSION}/wait-for && \
   chmod +x /tmp/wait-for-it && \
-  /tmp/wait-for-it --help >/dev/null
+  /tmp/wait-for-it --help 2>/dev/null
 
 # renovate: datasource=github-releases depName=hairyhenderson/gomplate
 ENV GOMPLATE_VERSION=4.3.3
@@ -34,7 +34,7 @@ RUN wget -O /tmp/su-exec https://github.com/tianon/gosu/releases/download/${GOSU
   chmod +x /tmp/su-exec && \
   /tmp/su-exec --help >/dev/null
 
-FROM arm64v8/debian:11@sha256:4811a4a3a14d6e28d1a5b7f98edd187dc66e036ee49bba614492c3fe1290c524
+FROM arm64v8/debian:11
 
 ENV CRON_ENABLED=false
 ENV TERM=xterm
