@@ -54,7 +54,7 @@ rulesets:
               integration_id: 15368
             - context: docker (arm64, linux/arm64)
               integration_id: 15368
-            - context: docker (arm, linux/arm/v6)
+            - context: docker (arm, linux/arm/v7)
               integration_id: 15368
     bypass_actors:
       - actor_id: 1
