@@ -1,4 +1,4 @@
-FROM arm64v8/debian:12@sha256:6ee560263164f07cdf4b03efbd60a2bb0d323dcd399c4197d5be599802ecd621 AS build
+FROM arm64v8/debian:12@sha256:9cc5981308d6b3db397d676b7adb0983a05462033144acc26cd86555a25a70a2 AS build
 
 ENV TERM=xterm
 ENV DEBIAN_FRONTEND=noninteractive
@@ -34,7 +34,7 @@ RUN wget -O /tmp/su-exec https://github.com/tianon/gosu/releases/download/${GOSU
   chmod +x /tmp/su-exec && \
   /tmp/su-exec --help >/dev/null
 
-FROM arm64v8/debian:12@sha256:6ee560263164f07cdf4b03efbd60a2bb0d323dcd399c4197d5be599802ecd621
+FROM arm64v8/debian:12@sha256:9cc5981308d6b3db397d676b7adb0983a05462033144acc26cd86555a25a70a2
 
 ENV CRON_ENABLED=false
 ENV TERM=xterm
