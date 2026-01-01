@@ -51,6 +51,9 @@ RUN apt-get update && \
 
 COPY ./overlay /
 
+RUN sed -i 's/\r$//' /usr/bin/entrypoint && \
+  chmod +x /usr/bin/entrypoint
+
 COPY --from=build /tmp/wait-for-it /usr/bin/
 COPY --from=build /tmp/gomplate /usr/bin/
 COPY --from=build /tmp/su-exec /usr/sbin/
