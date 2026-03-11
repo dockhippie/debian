@@ -1,7 +1,7 @@
 ---
 repository:
   name: debian
-  description: Docker images for debian
+  description: Docker images for Debian
   topics: docker, image
 
   private: false
