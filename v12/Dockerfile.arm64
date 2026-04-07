@@ -1,4 +1,4 @@
-FROM arm64v8/debian:bookworm-20260316@sha256:aaa40f164e34010e35cee8937aca52d56406ba71f79cf78102479661b98ce2b8 AS build
+FROM arm64v8/debian:bookworm-20260406@sha256:b2dd65ef13aa87f748958f562c10130e58287d553d6555ad1b668b907ff941d7 AS build
 
 ENV TERM=xterm
 ENV DEBIAN_FRONTEND=noninteractive
@@ -34,7 +34,7 @@ RUN wget -O /tmp/su-exec https://github.com/tianon/gosu/releases/download/${GOSU
   chmod +x /tmp/su-exec && \
   /tmp/su-exec --help >/dev/null
 
-FROM arm64v8/debian:bookworm-20260316@sha256:aaa40f164e34010e35cee8937aca52d56406ba71f79cf78102479661b98ce2b8
+FROM arm64v8/debian:bookworm-20260406@sha256:b2dd65ef13aa87f748958f562c10130e58287d553d6555ad1b668b907ff941d7
 
 ENV CRON_ENABLED=false
 ENV TERM=xterm
