@@ -1,4 +1,4 @@
-FROM arm64v8/debian:bullseye-20260610@sha256:0bbed289650279d07f4e33d659314fe59180fea78173770b81d91c0a96c6d6c7 AS build
+FROM arm64v8/debian:bullseye-20260623@sha256:ebf0494ce2dbd9d6005e405f251b43d4d08d3de49d8a4f08480e1fbb1f50b3f2 AS build
 
 ENV TERM=xterm
 ENV DEBIAN_FRONTEND=noninteractive
@@ -34,7 +34,7 @@ RUN wget -O /tmp/su-exec https://github.com/tianon/gosu/releases/download/${GOSU
   chmod +x /tmp/su-exec && \
   /tmp/su-exec --help >/dev/null
 
-FROM arm64v8/debian:bullseye-20260610@sha256:0bbed289650279d07f4e33d659314fe59180fea78173770b81d91c0a96c6d6c7
+FROM arm64v8/debian:bullseye-20260623@sha256:ebf0494ce2dbd9d6005e405f251b43d4d08d3de49d8a4f08480e1fbb1f50b3f2
 
 ENV CRON_ENABLED=false
 ENV TERM=xterm
