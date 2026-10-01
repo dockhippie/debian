@@ -1,0 +1,174 @@
+---
+# yaml-language-server: $schema=https://www.schemastore.org/github-workflow.json
+name: v13
+
+"on":
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+    paths:
+      - v13/*
+      - .github/workflows/v13.yml
+  pull_request:
+    branches:
+      - master
+    paths:
+      - v13/*
+      - .github/workflows/v13.yml
+  schedule:
+    - cron: "0 8 1 * *"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        variant:
+          - arch: amd64
+            platform: linux/amd64
+          - arch: arm64
+            platform: linux/arm64
+          - arch: arm
+            platform: linux/arm/v7
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v7
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          images: |
+            webhippie/debian
+            quay.io/webhippie/debian
+            ghcr.io/dockhippie/debian
+          labels: |
+            org.opencontainers.image.vendor=Webhippie
+            maintainer=Thomas Boerger <thomas@webhippie.de>
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v4
+
+      - name: Setup Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v4
+
+      - name: Hub login
+        uses: docker/login-action@v4
+        if: github.event_name != 'pull_request'
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Quay login
+        uses: docker/login-action@v4
+        if: github.event_name != 'pull_request'
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+
+      - name: Ghcr login
+        uses: docker/login-action@v4
+        if: github.event_name != 'pull_request'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image
+        uses: docker/build-push-action@v7
+        with:
+          builder: ${{ steps.buildx.outputs.name }}
+          context: v13/
+          provenance: false
+          file: v13/Dockerfile.${{ matrix.variant.arch }}
+          platforms: ${{ matrix.variant.platform }}
+          push: ${{ github.event_name != 'pull_request' }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          tags: |
+            webhippie/debian:13-${{ matrix.variant.arch }}
+            quay.io/webhippie/debian:13-${{ matrix.variant.arch }}
+            ghcr.io/dockhippie/debian:13-${{ matrix.variant.arch }}
+
+  manifest:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+
+    needs:
+      - docker
+
+    steps:
+      - name: Check tags
+        run: |
+          set -euo pipefail
+          REPO="webhippie/debian"
+          TAG="13"
+          ARCHS=("amd64" "arm64" "arm")
+
+          retry() {
+            local max=5 delay=10
+            for i in $(seq 1 $max); do
+              "$@" && return 0
+              echo "Attempt $i failed. Retrying in ${delay}s..."
+              sleep $delay
+              delay=$(( delay * 2 ))
+            done
+            return 1
+          }
+
+          for ARCH in "${ARCHS[@]}"; do
+            echo "Checking ${REPO}:${TAG}-${ARCH}..."
+            if ! retry docker manifest inspect "${REPO}:${TAG}-${ARCH}" > /dev/null 2>&1; then
+              echo "::error ::Image ${REPO}:${TAG}-${ARCH} is missing"
+              exit 1
+            fi
+            echo "${REPO}:${TAG}-${ARCH} does exist"
+          done
+
+      - name: Hub manifest
+        uses: actionhippie/manifest@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          template: webhippie/debian:13-ARCH
+          target: webhippie/debian:13
+          ignore_missing: true
+
+      - name: Quay manifest
+        uses: actionhippie/manifest@v1
+        with:
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          template: quay.io/webhippie/debian:13-ARCH
+          target: quay.io/webhippie/debian:13
+          ignore_missing: true
+
+      - name: Ghcr manifest
+        uses: actionhippie/manifest@v1
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          template: ghcr.io/dockhippie/debian:13-ARCH
+          target: ghcr.io/dockhippie/debian:13
+          ignore_missing: true
+
+...
