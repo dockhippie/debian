@@ -1,4 +1,4 @@
-FROM arm64v8/debian:11@sha256:a0ff03917f37e7107fced714bacc6f20afe3f90e3f65d87db1e8d25d746340cb AS build
+FROM arm64v8/debian:13 AS build
 
 ENV TERM=xterm
 ENV DEBIAN_FRONTEND=noninteractive
