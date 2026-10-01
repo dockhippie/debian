@@ -114,7 +114,7 @@ jobs:
       - name: Check tags
         run: |
           set -euo pipefail
-          REPO="webhippie/debian"
+          REPO=("webhippie/debian" "quay.io/webhippie/debian" "ghcr.io/dockhippie/debian")
           TAG="latest"
           ARCHS=("amd64" "arm64" "arm")
 
@@ -130,12 +130,14 @@ jobs:
           }
 
           for ARCH in "${ARCHS[@]}"; do
-            echo "Checking ${REPO}:${TAG}-${ARCH}..."
-            if ! retry docker manifest inspect "${REPO}:${TAG}-${ARCH}" > /dev/null 2>&1; then
-              echo "::error ::Image ${REPO}:${TAG}-${ARCH} is missing"
-              exit 1
-            fi
-            echo "${REPO}:${TAG}-${ARCH} does exist"
+            for R in "${REPO[@]}"; do
+              echo "Checking ${R}:${TAG}-${ARCH}..."
+              if ! retry docker manifest inspect "${R}:${TAG}-${ARCH}" > /dev/null 2>&1; then
+                echo "::error ::Image ${R}:${TAG}-${ARCH} is missing"
+                exit 1
+              fi
+              echo "${R}:${TAG}-${ARCH} does exist"
+            done
           done
 
       - name: Hub manifest
