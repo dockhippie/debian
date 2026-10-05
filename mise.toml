@@ -4,4 +4,18 @@
 node = "24"
 prek = "0.5.5"
 
-"github:estesp/manifest-tool" = { version = "2.2.2", rename_exe = "manifest-tool", filter_bins = "manifest-tool" }
+[tools."github:estesp/manifest-tool"]
+version = "2.2.2"
+filter_bins = "manifest-tool"
+
+[tools."github:estesp/manifest-tool".platforms.linux-x64]
+rename_exe = { "manifest-tool-linux-amd64" = "manifest-tool" }
+
+[tools."github:estesp/manifest-tool".platforms.linux-arm64]
+rename_exe = { "manifest-tool-linux-arm64" = "manifest-tool" }
+
+[tools."github:estesp/manifest-tool".platforms.macos-x64]
+rename_exe = { "manifest-tool-darwin-amd64" = "manifest-tool" }
+
+[tools."github:estesp/manifest-tool".platforms.macos-arm64]
+rename_exe = { "manifest-tool-darwin-arm64" = "manifest-tool" }
