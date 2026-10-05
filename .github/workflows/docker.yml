@@ -111,12 +111,41 @@ jobs:
       - docker
 
     steps:
-      - name: Check tags
+      - name: Checkout source
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Install tools
+        uses: jdx/mise-action@v4
+
+      - name: Hub login
+        uses: docker/login-action@v4
+        if: github.event_name != 'pull_request'
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Quay login
+        uses: docker/login-action@v4
+        if: github.event_name != 'pull_request'
+        with:
+          registry: quay.io
+          username: ${{ secrets.QUAY_USERNAME }}
+          password: ${{ secrets.QUAY_PASSWORD }}
+
+      - name: Ghcr login
+        uses: docker/login-action@v4
+        if: github.event_name != 'pull_request'
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push manifests
         run: |
-          set -euo pipefail
-          REPO=("webhippie/debian" "quay.io/webhippie/debian" "ghcr.io/dockhippie/debian")
-          TAG="latest"
-          ARCHS=("amd64" "arm64" "arm")
+          repos=("webhippie/debian:latest" "quay.io/webhippie/debian:latest" "ghcr.io/dockhippie/debian:latest")
+          archs=("amd64" "arm64" "arm")
 
           retry() {
             local max=5 delay=10
@@ -129,45 +158,19 @@ jobs:
             return 1
           }
 
-          for ARCH in "${ARCHS[@]}"; do
-            for R in "${REPO[@]}"; do
-              echo "Checking ${R}:${TAG}-${ARCH}..."
-              if ! retry docker manifest inspect "${R}:${TAG}-${ARCH}" > /dev/null 2>&1; then
-                echo "::error ::Image ${R}:${TAG}-${ARCH} is missing"
+          for arch in "${archs[@]}"; do
+            for repo in "${repos[@]}"; do
+              echo "Checking ${repo}-${arch}..."
+              if ! retry docker manifest inspect "${repo}-${arch}" > /dev/null 2>&1; then
+                echo "::error ::Image ${repo}-${arch} is missing"
                 exit 1
               fi
-              echo "${R}:${TAG}-${ARCH} does exist"
+              echo "${repo}-${arch} does exist"
             done
           done
 
-      - name: Hub manifest
-        uses: actionhippie/manifest@v1
-        with:
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
-          template: webhippie/debian:latest-ARCH
-          target: webhippie/debian:latest
-          ignore_missing: true
-
-      - name: Quay manifest
-        uses: actionhippie/manifest@v1
-        with:
-          username: ${{ secrets.QUAY_USERNAME }}
-          password: ${{ secrets.QUAY_PASSWORD }}
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
-          template: quay.io/webhippie/debian:latest-ARCH
-          target: quay.io/webhippie/debian:latest
-          ignore_missing: true
-
-      - name: Ghcr manifest
-        uses: actionhippie/manifest@v1
-        with:
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
-          template: ghcr.io/dockhippie/debian:latest-ARCH
-          target: ghcr.io/dockhippie/debian:latest
-          ignore_missing: true
+          for repo in "${repos[@]}"; do
+            retry manifest-tool push from-args --platforms linux/amd64,linux/arm64,linux/arm/v7 --template $repo-ARCH --target $repo
+          done
 
 ...

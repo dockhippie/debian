@@ -3,3 +3,5 @@
 [tools]
 node = "24"
 prek = "0.5.5"
+
+"github:estesp/manifest-tool" = { version = "2.2.2", rename_exe = "manifest-tool", filter_bins = "manifest-tool" }
