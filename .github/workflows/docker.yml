@@ -167,6 +167,7 @@ jobs:
               args+=(--amend "${repo}-${arch}")
             done
             docker manifest create "$repo" "${args[@]}"
+            docker manifest push "$repo"
           done
 
 ...
